@@ -22,7 +22,7 @@ jobs:
     - name: Install MinGW
       run: |
         choco install mingw -y
-        echo "::add-path::C:\\tools\\mingw64\\bin"
+        echo "C:\tools\mingw64\bin" >> $GITHUB_PATH
 
     - name: Create build output directory
       run: mkdir build
