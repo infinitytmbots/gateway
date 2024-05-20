@@ -19,16 +19,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install MinGW
-      run: |
-        choco install mingw -y
-        echo "C:\tools\mingw64\bin" >> $GITHUB_PATH
-
     - name: Create build output directory
       run: mkdir build
 
     - name: Build
-      run: go build -v -o build .
+      run: go build -a -v -o build .
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1
