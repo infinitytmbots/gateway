@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [windows-latest]
     steps:
 
     - name: Set up Go 1.22
@@ -17,15 +17,18 @@ jobs:
       id: go
 
     - name: Checkout repository
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
+
+    - name: Install MinGW
+      run: |
+        choco install mingw -y
+        echo "::add-path::C:\\tools\\mingw64\\bin"
 
     - name: Create build output directory
       run: mkdir build
 
     - name: Build
       run: go build -v -o build .
-      env:
-        CGO_ENABLED: 0
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1
